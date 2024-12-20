@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #7F4F82, #B187AD, #BE9BBE ,  #B187AD , #7F4F82); /* Purple gradient */
+            font-family: Arial, sans-serif;
+        }
+        .countdown {
+            text-align: center;
+            background: linear-gradient(45deg, #ffd700, #ffaf40); /* Gold gradient */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .countdown h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            background: #563658; /* Gold gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .countdown p {
+            font-weight: bolder;
+            font-size: 1.5em;
+            margin: 5px 0;
+            background: #563658; /* Gold gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown">
+        <h1>Midas Will Rise Again</h1>
+        <p id="days"></p>
+        <p id="hours"></p>
+        <p id="minutes"></p>
+        <p id="seconds"></p>
+    </div>
+
+    <script>
+        function countdown() {
+            const targetDate = new Date('December 26, 2024 00:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerHTML = days + " Days";
+            document.getElementById('hours').innerHTML = hours + " Hours";
+            document.getElementById('minutes').innerHTML = minutes + " Minutes";
+            document.getElementById('seconds').innerHTML = seconds + " Seconds";
+
+            if (difference < 0) {
+                clearInterval(interval);
+                document.querySelector('.countdown').innerHTML = "<h1>Countdown Ended</h1>";
+            }
+        }
+
+        const interval = setInterval(countdown, 1000);
+    </script>
+</body>
+</html>
